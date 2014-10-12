@@ -2,6 +2,7 @@
   "name": "koars-config",
   "version": "1.0.0",
   "main": "index.js",
+  "description": "Loading of config files",
   "repository": {
     "type": "git",
     "url": "https://github.com/koars/config.git"

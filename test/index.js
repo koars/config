@@ -49,9 +49,26 @@ describe('The config module', function() {
 
 		it('with other types', function() {
 			var cfg = config('config');
-			cfg.defaults('default', function() {return 'something';});
-			cfg.default.must.be.a.function();
-			cfg.default().must.be('something');
+			cfg.defaults('default2', function() {return 'something';});
+			cfg.default2.must.be.a.function();
+			cfg.default2().must.be('something');
+		});
+	});
+
+	describe('must persist data across loads', function() {
+		before(function() {
+			var cfg = config('config');
+			cfg.defaults('persist', 'something');
+		});
+
+		it('on first load', function() {
+			var persisted = config('config');
+			persisted.persist.must.be('something');
+		});
+
+		it('on second load', function() {
+			var persisted = config('config');
+			persisted.persist.must.be('something');
 		});
 	});
 });

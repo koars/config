@@ -1,5 +1,5 @@
 var mock = require('mock-fs');
-var config = require('../index.js');
+var config = require('../index.js')();
 
 before(function() {
 	mock({

@@ -5,9 +5,17 @@ var defaults = require('merge-defaults');
 var cache = {};
 
 module.exports = function loadConfig(dir) {
+	if(typeof dir !== 'string') throw new TypeError('No string passed as the source directory');
+
 	if(!cache[dir]) {
-		var config = {};
-		var files = fs.readdirSync(dir);
+		var files, config = {};
+
+		try {
+			files = fs.readdirSync(dir);
+		} catch(e) {
+			if(e.code !== 'ENOENT') throw e;
+			files = [];
+		}
 
 		files.forEach(function(file) {
 			config[path.basename(file, path.extname(file))] = require(path.join(process.cwd(), dir, file));

@@ -71,4 +71,16 @@ describe('The config module', function() {
 			persisted.persist.must.be('something');
 		});
 	});
+
+	it('must throw a TypeError if no string is supplied', function() {
+		config.must.throw(TypeError);
+		config.bind(null, function() {}).must.throw(TypeError);
+		config.bind(null, 'ABC').must.not.throw();
+	});
+
+	it('must resort to an empty object if the directory does not exist', function() {
+		var cfg = config('abc');
+		Object.keys(cfg).length.must.be(1);
+		cfg.must.have.property('defaults');
+	});
 });

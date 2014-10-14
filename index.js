@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var _ = require('lodash');
+var defaults = require('merge-defaults');
 
 var cache = {};
 
@@ -18,7 +18,7 @@ module.exports = function loadConfig(dir) {
 				config[attr] = data;
 			} else {
 				var src = config[attr] || {};
-				config[attr] = _.defaults(src, data);			
+				config[attr] = defaults(src, data);			
 			}
 		};
 
